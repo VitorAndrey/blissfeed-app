@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Feed() {
-  return <div>Feed</div>;
+  return <Text>Feed</Text>;
 }

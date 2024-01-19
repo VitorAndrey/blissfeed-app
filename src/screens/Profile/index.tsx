@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Profile() {
-  return <div>Profile</div>;
+  return <Text>Profile</Text>;
 }

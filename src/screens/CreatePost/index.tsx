@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function CreatePost() {
-  return <div>CreatePost</div>;
+  return <Text>CreatePost</Text>;
 }

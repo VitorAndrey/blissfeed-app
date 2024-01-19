@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Register() {
-  return <div>Register</div>;
+  return <Text>Register</Text>;
 }

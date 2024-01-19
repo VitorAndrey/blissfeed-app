@@ -3,6 +3,13 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
+import {CreatePost} from '@screens/CreatePost';
+import {Feed} from '@screens/Feed';
+import {Meditate} from '@screens/Meditate';
+import {Onboarding} from '@screens/Onboarding';
+import {Profile} from '@screens/Profile';
+import {Search} from '@screens/Search';
+
 import {
   CoffeeIcon,
   HomeIcon,
@@ -10,13 +17,6 @@ import {
   SearchIcon,
   User2Icon,
 } from 'lucide-react-native';
-
-import {CreatePost} from '@/screens/CreatePost';
-import {Feed} from '@/screens/Feed';
-import {Meditate} from '@/screens/Meditate';
-import {Onboarding} from '@/screens/Onboarding';
-import {Profile} from '@/screens/Profile';
-import {Search} from '@/screens/Search';
 
 export type AppRoutes = {
   CreatePost: undefined;
@@ -34,7 +34,7 @@ const {Navigator, Screen} = createBottomTabNavigator<AppRoutes>();
 export function AppRoutes() {
   return (
     <Navigator
-      initialRouteName={'OnBoarding'}
+      initialRouteName={'Feed'}
       sceneContainerStyle={{backgroundColor: 'transparent'}}
       backBehavior="history"
       screenOptions={{

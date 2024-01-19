@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Welcome() {
-  return <div>Welcome</div>;
+  return <Text>Welcome</Text>;
 }

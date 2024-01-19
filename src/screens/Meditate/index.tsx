@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Meditate() {
-  return <div>Meditate</div>;
+  return <Text>Meditate</Text>;
 }

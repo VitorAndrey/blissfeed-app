@@ -3,9 +3,9 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 
-import {Login} from '@/screens/Login';
-import {Register} from '@/screens/Register';
-import {Welcome} from '@/screens/Welcome';
+import {Login} from '@screens/Login';
+import {Register} from '@screens/Register';
+import {Welcome} from '@screens/Welcome';
 
 export type AuthRoutes = {
   Welcome: undefined;

@@ -16,7 +16,7 @@ export function Routes() {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <>{isUserLogged ? <AppRoutes /> : <AuthRoutes />}</>
+      {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }

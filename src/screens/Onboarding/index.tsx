@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Onboarding() {
-  return <div>Onboarding</div>;
+  return <Text>Onboarding</Text>;
 }

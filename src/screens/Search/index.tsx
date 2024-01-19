@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Search() {
-  return <div>Search</div>;
+  return <Text>Search</Text>;
 }

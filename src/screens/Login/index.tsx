@@ -1,3 +1,5 @@
+import {Text} from 'react-native';
+
 export function Login() {
-  return <div>Login</div>;
+  return <Text>Login</Text>;
 }
