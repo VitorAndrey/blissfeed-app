@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react-native';
 
-import {Feed} from '..';
+import {Conversation} from '..';
 
 test('form submits two answers', () => {
-  render(<Feed />);
+  render(<Conversation />);
 });

@@ -3,7 +3,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import {CreatePost} from '@screens/CreatePost';
+import {Conversation} from '@screens/Conversation';
 import {Feed} from '@screens/Feed';
 import {Meditate} from '@screens/Meditate';
 import {Onboarding} from '@screens/Onboarding';
@@ -19,7 +19,7 @@ import {
 } from 'lucide-react-native';
 
 export type AppRoutes = {
-  CreatePost: undefined;
+  Conversation: undefined;
   Feed: undefined;
   Meditate: undefined;
   OnBoarding: undefined;
@@ -74,8 +74,8 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="CreatePost"
-        component={CreatePost}
+        name="Conversation"
+        component={Conversation}
         options={{
           tabBarIcon: ({color}) => <PenSquareIcon color={color} />,
           tabBarStyle: {display: 'none'},
