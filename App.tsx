@@ -1,12 +1,14 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {Button, Text, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {MMKV} from 'react-native-mmkv';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 export const storage = new MMKV();
 const Stack = createNativeStackNavigator();
@@ -22,14 +24,16 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Posts" component={PostScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </QueryClientProvider>
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Posts" component={PostScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </QueryClientProvider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }

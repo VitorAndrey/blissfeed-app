@@ -9,7 +9,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'react/react-in-jsx-scope': 'off',
     'simple-import-sort/imports': [
-      'warning',
+      'warn',
       {
         groups: [
           ['^react', '^react-native'],
@@ -33,6 +33,12 @@ module.exports = {
         ],
       },
     ],
-    'simple-import-sort/exports': 'warning',
+    'simple-import-sort/exports': 'warn',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
