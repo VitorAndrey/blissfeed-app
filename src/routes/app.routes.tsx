@@ -5,9 +5,9 @@ import {
 
 import {Conversation} from '@screens/Conversation';
 import {Feed} from '@screens/Feed';
-import {Meditate} from '@screens/Meditate';
 import {Onboarding} from '@screens/Onboarding';
 import {Profile} from '@screens/Profile';
+import {Relaxing} from '@screens/Relaxing';
 import {Search} from '@screens/Search';
 
 import {
@@ -21,7 +21,7 @@ import {
 export type AppRoutes = {
   Conversation: undefined;
   Feed: undefined;
-  Meditate: undefined;
+  Relaxing: undefined;
   OnBoarding: undefined;
   Profile: undefined;
   Search: undefined;
@@ -83,8 +83,8 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="Meditate"
-        component={Meditate}
+        name="Relaxing"
+        component={Relaxing}
         options={{
           tabBarIcon: ({color}) => <CoffeeIcon color={color} />,
         }}

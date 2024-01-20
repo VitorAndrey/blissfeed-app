@@ -1,10 +1,21 @@
-import {useQuery} from '@tanstack/react-query';
+import {useQueries, useQuery} from '@tanstack/react-query';
 
-import {getPosts} from './api';
+import {getPost, getPostsIds} from './api';
 
-export function usePosts() {
+export function usePostsIds() {
   return useQuery({
     queryKey: ['todos'],
-    queryFn: getPosts,
+    queryFn: getPostsIds,
+  });
+}
+
+export function usePosts(ids: (string | undefined)[] | undefined) {
+  return useQueries({
+    queries: (ids ?? []).map(id => {
+      return {
+        queryKey: ['post', id],
+        queryFn: () => getPost(id!),
+      };
+    }),
   });
 }

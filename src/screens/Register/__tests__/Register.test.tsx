@@ -2,6 +2,6 @@ import {render} from '@testing-library/react-native';
 
 import {Register} from '..';
 
-test('form submits two answers', () => {
+test('Register renders correctly', () => {
   render(<Register />);
 });

@@ -2,6 +2,6 @@ import {render} from '@testing-library/react-native';
 
 import {Login} from '..';
 
-test('form submits two answers', () => {
+test('Login renders correctly', () => {
   render(<Login />);
 });

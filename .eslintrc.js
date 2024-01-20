@@ -35,9 +35,10 @@ module.exports = {
     ],
     'simple-import-sort/exports': 'warn',
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         endOfLine: 'auto',
+        bracketSpacing: true,
       },
     ],
   },
