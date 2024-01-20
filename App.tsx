@@ -9,19 +9,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Routes } from '@routes/index';
 
-import { theme } from '@theme/index';
+import { darkTheme, theme } from '@theme/index';
 
 export const storage = new MMKV();
 const queryClient = new QueryClient();
 
 export default function App() {
-  Appearance.setColorScheme('light');
+  const colorScheme = Appearance.getColorScheme();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={colorScheme === 'dark' ? darkTheme : theme}>
             <StatusBar
               barStyle="dark-content"
               backgroundColor="transparent"

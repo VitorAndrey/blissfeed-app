@@ -11,7 +11,7 @@ import { AuthRoutes } from './auth.routes';
 const Box = createBox<ThemeProps>();
 
 export function Routes() {
-  const isUserLogged = true;
+  const isUserLogged = false;
   const theme = useTheme<ThemeProps>();
 
   const MyTheme = {
