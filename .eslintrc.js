@@ -6,6 +6,7 @@ module.exports = {
   ],
   plugins: ['@tanstack/query', 'simple-import-sort'],
   rules: {
+    'react-hooks/exhaustive-deps': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'react/react-in-jsx-scope': 'off',
     'simple-import-sort/imports': [

@@ -1,6 +1,6 @@
-import {Button} from 'react-native';
+import { Button } from 'react-native';
 
-import {useCreatePost} from '@services/mutations';
+import { useCreatePost } from '@services/mutations';
 
 export function Conversation() {
   const createPostMutation = useCreatePost();

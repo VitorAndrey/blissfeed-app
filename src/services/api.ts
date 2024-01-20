@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Post } from '@models/index';
+import { Post } from '@models/post';
 
 const BASE_URL = 'http://localhost:3333';
 const axiosInstance = axios.create({ baseURL: BASE_URL });

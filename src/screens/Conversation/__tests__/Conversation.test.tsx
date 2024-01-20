@@ -1,6 +1,6 @@
-import {render} from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 
-import {Conversation} from '..';
+import { Conversation } from '..';
 
 test('Conversation renders correctly', () => {
   render(<Conversation />);

@@ -1,5 +1,6 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createBox, useTheme } from '@shopify/restyle';
+import { useBoundStore } from '@store/index';
 
 import { ThemeProps } from '@theme/index';
 
@@ -11,8 +12,10 @@ import { AuthRoutes } from './auth.routes';
 const Box = createBox<ThemeProps>();
 
 export function Routes() {
-  const isUserLogged = false;
+  const isUserLogged = useBoundStore(state => state.isUserLogged);
   const theme = useTheme<ThemeProps>();
+
+  console.log(isUserLogged);
 
   const MyTheme = {
     ...DefaultTheme,
