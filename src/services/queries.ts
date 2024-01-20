@@ -1,6 +1,6 @@
-import {useQueries, useQuery} from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 
-import {getPost, getPostsIds} from './api';
+import { getPost, getPostsIds } from './api';
 
 export function usePostsIds() {
   return useQuery({

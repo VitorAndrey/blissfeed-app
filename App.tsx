@@ -1,5 +1,5 @@
 import React from 'react';
-import { Appearance } from 'react-native';
+import { Appearance, StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MMKV } from 'react-native-mmkv';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -22,6 +22,11 @@ export default function App() {
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
+            <StatusBar
+              barStyle="dark-content"
+              backgroundColor="transparent"
+              translucent
+            />
             <Routes />
           </ThemeProvider>
         </QueryClientProvider>

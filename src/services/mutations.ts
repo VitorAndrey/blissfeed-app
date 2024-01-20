@@ -1,7 +1,7 @@
-import {useMutation} from '@tanstack/react-query';
-import {Post} from 'src/types/post';
+import { useMutation } from '@tanstack/react-query';
 
-import {createPost} from './api';
+import { Post } from '../types/post';
+import { createPost } from './api';
 
 export function useCreatePost() {
   return useMutation({

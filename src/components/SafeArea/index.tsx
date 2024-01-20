@@ -1,11 +1,11 @@
-import {View, ViewProps} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { View, ViewProps } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface SafeAreaProps extends ViewProps {
   children: React.ReactNode;
 }
 
-export function SafeArea({children, ...rest}: SafeAreaProps) {
+export function SafeArea({ children, ...rest }: SafeAreaProps) {
   const insets = useSafeAreaInsets();
 
   return (

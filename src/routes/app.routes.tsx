@@ -2,13 +2,14 @@ import {
   BottomTabNavigationProp,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import { useTheme } from '@shopify/restyle';
 
-import {Conversation} from '@screens/Conversation';
-import {Feed} from '@screens/Feed';
-import {Onboarding} from '@screens/Onboarding';
-import {Profile} from '@screens/Profile';
-import {Relaxing} from '@screens/Relaxing';
-import {Search} from '@screens/Search';
+import { Conversation } from '@screens/Conversation';
+import { Feed } from '@screens/Feed';
+import { Onboarding } from '@screens/Onboarding';
+import { Profile } from '@screens/Profile';
+import { Relaxing } from '@screens/Relaxing';
+import { Search } from '@screens/Search';
 
 import {
   CoffeeIcon,
@@ -17,6 +18,8 @@ import {
   SearchIcon,
   User2Icon,
 } from 'lucide-react-native';
+
+import { ThemeProps } from '@theme/index';
 
 export type AppRoutes = {
   Conversation: undefined;
@@ -29,19 +32,22 @@ export type AppRoutes = {
 
 export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
 
-const {Navigator, Screen} = createBottomTabNavigator<AppRoutes>();
+const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 export function AppRoutes() {
+  const theme = useTheme<ThemeProps>();
+  const { tabBarActiveTintColor, tabBarInactiveTintColor } = theme.colors;
+
   return (
     <Navigator
       initialRouteName={'Feed'}
-      sceneContainerStyle={{backgroundColor: 'transparent'}}
+      sceneContainerStyle={{ backgroundColor: 'transparent' }}
       backBehavior="history"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: '#111111',
-        tabBarInactiveTintColor: '#999999',
+        tabBarActiveTintColor,
+        tabBarInactiveTintColor,
         tabBarStyle: {
           backgroundColor: 'transparent',
           elevation: 0,
@@ -53,7 +59,7 @@ export function AppRoutes() {
         component={Onboarding}
         options={{
           tabBarButton: () => null,
-          tabBarStyle: {display: 'none'},
+          tabBarStyle: { display: 'none' },
         }}
       />
 
@@ -61,7 +67,7 @@ export function AppRoutes() {
         name="Feed"
         component={Feed}
         options={{
-          tabBarIcon: ({color}) => <HomeIcon color={color} />,
+          tabBarIcon: ({ color }) => <HomeIcon color={color} />,
         }}
       />
 
@@ -69,7 +75,7 @@ export function AppRoutes() {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: ({color}) => <SearchIcon color={color} />,
+          tabBarIcon: ({ color }) => <SearchIcon color={color} />,
         }}
       />
 
@@ -77,8 +83,8 @@ export function AppRoutes() {
         name="Conversation"
         component={Conversation}
         options={{
-          tabBarIcon: ({color}) => <PenSquareIcon color={color} />,
-          tabBarStyle: {display: 'none'},
+          tabBarIcon: ({ color }) => <PenSquareIcon color={color} />,
+          tabBarStyle: { display: 'none' },
         }}
       />
 
@@ -86,7 +92,7 @@ export function AppRoutes() {
         name="Relaxing"
         component={Relaxing}
         options={{
-          tabBarIcon: ({color}) => <CoffeeIcon color={color} />,
+          tabBarIcon: ({ color }) => <CoffeeIcon color={color} />,
         }}
       />
 
@@ -94,7 +100,7 @@ export function AppRoutes() {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({color}) => <User2Icon color={color} />,
+          tabBarIcon: ({ color }) => <User2Icon color={color} />,
         }}
       />
     </Navigator>

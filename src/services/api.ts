@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {Post} from 'src/types/post';
+import { Post } from 'src/types/post';
 
 const BASE_URL = 'http://localhost:3333';
-const axiosInstance = axios.create({baseURL: BASE_URL});
+const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export async function getPostsIds() {
   return (await axiosInstance.get<Post[]>('posts')).data.map(post => post.id);

@@ -1,22 +1,32 @@
-import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { createBox, useTheme } from '@shopify/restyle';
 
-import {AppRoutes} from './app.routes';
-import {AuthRoutes} from './auth.routes';
+import { ThemeProps } from '@theme/index';
+
+import { SafeArea } from '@components/SafeArea';
+
+import { AppRoutes } from './app.routes';
+import { AuthRoutes } from './auth.routes';
+
+const Box = createBox<ThemeProps>();
 
 export function Routes() {
   const isUserLogged = true;
+  const theme = useTheme<ThemeProps>();
 
   const MyTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: '#ffffff',
+      background: theme.colors.mainBackground,
     },
   };
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
+      <Box flex={1} backgroundColor="mainBackground">
+        <SafeArea>{isUserLogged ? <AppRoutes /> : <AuthRoutes />}</SafeArea>
+      </Box>
     </NavigationContainer>
   );
 }
