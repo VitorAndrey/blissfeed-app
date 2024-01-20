@@ -1,4 +1,4 @@
-type ArticleCategory = 'Advice' | 'Informative' | 'Curiosity';
+type ArticleCategory = 'Tips' | 'Informative' | 'Curiosity';
 
 export interface Article {
   id: string;

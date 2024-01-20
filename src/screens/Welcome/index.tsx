@@ -30,7 +30,7 @@ export function Welcome() {
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        gap="s">
+        gap="sm">
         <Box height={32} width={32} borderRadius={50} bg="mainForeground" />
         <Text variant="header">Blissfeed</Text>
       </Box>
@@ -46,8 +46,8 @@ export function Welcome() {
         />
       </Box>
 
-      <Box alignItems="center" px="m">
-        <Text mb="s" style={{ maxWidth: 180 }} textAlign="center">
+      <Box alignItems="center" px="md">
+        <Text mb="sm" style={{ maxWidth: 180 }} textAlign="center">
           Compartilhe <Text>Paz </Text>
           Cultive
           <Text> Alegria</Text>
@@ -58,9 +58,7 @@ export function Welcome() {
           Blissfeed.
         </Text>
 
-        <TouchableOpacity
-          style={{ backgroundColor: 'red' }}
-          onPress={handleNavigateToRegister}>
+        <TouchableOpacity onPress={handleNavigateToRegister}>
           <Text>Vamos começar!</Text>
         </TouchableOpacity>
 

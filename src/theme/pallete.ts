@@ -3,9 +3,11 @@ export const palette = {
   purplePrimary: '#5A31F4',
   purpleDark: '#3F22AB',
 
-  greenLight: '#56DCBA',
-  greenPrimary: '#0ECD9D',
+  greenLight: '#0ECD9D',
   greenDark: '#0A906E',
+
+  redLight: '#FF5E5E',
+  redDark: '#Af1B1B',
 
   gray_50: '#f1f1ef',
   gray_100: '#dad9d6',
@@ -20,4 +22,6 @@ export const palette = {
 
   black: '#0B0B0B',
   white: '#F0F2F3',
+
+  transparent: 'transparent',
 };

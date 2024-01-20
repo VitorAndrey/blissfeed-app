@@ -10,14 +10,15 @@ export interface User {
   updated_at: Date;
 }
 
+export interface LoginUser {
+  email: string;
+  password: string;
+}
+
 export interface CreateUser {
-  id?: string;
   name: string;
   email: string;
   password: string;
-  profile_img?: string | null;
-  phone_number?: string | null;
-  birth_date?: Date | string | null;
 }
 
 export interface UpdateUser {
