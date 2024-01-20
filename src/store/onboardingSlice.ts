@@ -4,21 +4,21 @@ import { storage } from '../../App';
 
 export interface OnboardingSlice {
   alreadyViewedOnboarding: boolean;
-  markAsViewed: () => void;
-  markAsUnviewed: () => void;
+  handleAlreadySeenOnboarding: () => void;
+  handleHaventSeenOnboarding: () => void;
   onLoadOnboarding: () => void;
 }
 
 export const createOnboardingSlice: StateCreator<OnboardingSlice> = set => ({
   alreadyViewedOnboarding: false,
-  markAsViewed: async () => {
+  handleAlreadySeenOnboarding: async () => {
     await storage.set(
       '@blissfeed:alreadyViewedOnboarding',
       JSON.stringify(true),
     );
     set({ alreadyViewedOnboarding: true });
   },
-  markAsUnviewed: async () => {
+  handleHaventSeenOnboarding: async () => {
     await storage.set(
       '@blissfeed:alreadyViewedOnboarding',
       JSON.stringify(false),

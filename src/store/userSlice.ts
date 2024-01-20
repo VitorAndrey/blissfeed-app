@@ -7,24 +7,24 @@ import { storage } from '../../App';
 export interface UserSlice {
   user: User | null;
   isUserLogged: boolean;
-  logOut: () => void;
-  logIn: (user: User) => void;
-  onLoadUser: () => void;
+  handleLogOut: () => void;
+  handleLogIn: (user: User) => void;
+  handleOnLoadUser: () => void;
 }
 
 export const createUserSlice: StateCreator<UserSlice> = set => ({
   user: null,
   isUserLogged: false,
 
-  logOut: async () => {
+  handleLogOut: async () => {
     await storage.delete('@blissfeed:user');
     set({ user: null, isUserLogged: false });
   },
-  logIn: async user => {
+  handleLogIn: async user => {
     await storage.set('@blissfeed:user', JSON.stringify(user));
     set({ user, isUserLogged: true });
   },
-  onLoadUser: async () => {
+  handleOnLoadUser: async () => {
     const jsonUser = await storage.getString('@blissfeed:user');
     if (jsonUser) {
       set({ user: JSON.parse(jsonUser), isUserLogged: true });

@@ -17,7 +17,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   const colorScheme = Appearance.getColorScheme();
-  const onLoadUser = useBoundStore(state => state.onLoadUser);
+  const handleOnLoadUser = useBoundStore(state => state.handleOnLoadUser);
   const onLoadOnboarding = useBoundStore(state => state.onLoadOnboarding);
 
   const [loading, setLoading] = useState(true);
@@ -25,14 +25,14 @@ export default function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        await Promise.all([onLoadUser(), onLoadOnboarding()]);
+        await Promise.all([handleOnLoadUser(), onLoadOnboarding()]);
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [onLoadUser, onLoadOnboarding]);
+  }, [handleOnLoadUser, onLoadOnboarding]);
 
   if (loading) {
     return (
@@ -50,7 +50,9 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={colorScheme === 'dark' ? darkTheme : theme}>
             <StatusBar
-              barStyle="dark-content"
+              barStyle={
+                colorScheme === 'dark' ? 'light-content' : 'dark-content'
+              }
               backgroundColor="transparent"
               translucent
             />
