@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -11,9 +11,10 @@ import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 import { CreateUser } from '@models/user';
 import { registerUser } from '@services/api';
 
+import { CheckIcon } from 'lucide-react-native';
+
 import { ThemeProps } from '@theme/index';
 
-import { Button } from '@components/Button';
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
 import { Loading } from '@components/Loadig';
@@ -31,6 +32,7 @@ const Text = createText<ThemeProps>();
 
 export function Register() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [agreedConditions, setAgreedConditions] = useState<boolean>(false);
 
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
@@ -65,8 +67,12 @@ export function Register() {
     }
   };
 
-  function handleNavigateToRegister() {
-    navigation.navigate('Register');
+  function handleNavigateToLogin() {
+    navigation.navigate('Login');
+  }
+
+  function handleAgreedConditions() {
+    setAgreedConditions(prev => !prev);
   }
 
   return (
@@ -81,10 +87,11 @@ export function Register() {
         showsVerticalScrollIndicator={false}>
         <Box alignItems="center" px="lg" pb="xs">
           <Text mb="sm" textAlign="center">
-            Bem vindo!
+            Criar Conta
           </Text>
           <Text textAlign="center">
-            Obrigado por entrar no Blissfeed... É bom ter você conosco!
+            Desabafe, conecte-se e encontre paz. Junte-se à comunidade
+            Blissfeed.
           </Text>
         </Box>
 
@@ -134,22 +141,35 @@ export function Register() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <Box
-            mb="sm"
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="flex-end">
-            <Button variant="link" title="Esqueceu a senha?" />
+          <Box mb="sm" flexDirection="row" alignItems="center">
+            <TouchableOpacity
+              onPress={handleAgreedConditions}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'lightgray',
+                height: 20,
+                width: 20,
+                borderRadius: 5,
+              }}>
+              {agreedConditions && <CheckIcon color="white" size={14} />}
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={handleAgreedConditions}>
+              <Text mx="xs">Aceito os</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text>termos e condições.</Text>
+            </TouchableOpacity>
           </Box>
 
           {isLoading ? (
             <Loading />
           ) : (
-            <Button
-              variant="primary"
-              onPress={handleSubmit(onSubmit)}
-              title="Registrar"
-            />
+            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+              <Text>Registrar</Text>
+            </TouchableOpacity>
           )}
 
           <Box
@@ -157,12 +177,10 @@ export function Register() {
             flexDirection="row"
             alignItems="center"
             justifyContent="center">
-            <Text mr="xs">Não tem uma conta?</Text>
-            <Button
-              onPress={handleNavigateToRegister}
-              variant="link"
-              title="Registrar!"
-            />
+            <Text mr="xs">Já tem uma conta?</Text>
+            <TouchableOpacity onPress={handleNavigateToLogin}>
+              <Text>Entrar!</Text>
+            </TouchableOpacity>
           </Box>
         </Box>
       </ScrollView>

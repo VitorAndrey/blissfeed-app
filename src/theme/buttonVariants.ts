@@ -8,7 +8,6 @@ export const buttonVariants = {
     borderRadius: 60,
   },
   link: {
-    backgroundColor: 'trasparent',
     maxWidht: 'max-content',
   },
   defaults: {

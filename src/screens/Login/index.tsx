@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +14,6 @@ import { loginUser } from '@services/api';
 
 import { ThemeProps } from '@theme/index';
 
-import { Button } from '@components/Button';
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
 import { Loading } from '@components/Loadig';
@@ -124,17 +123,17 @@ export function Login() {
             flexDirection="row"
             alignItems="center"
             justifyContent="flex-end">
-            <Button variant="link" title="Esqueceu a senha?" />
+            <TouchableOpacity>
+              <Text>Esqueci a senha</Text>
+            </TouchableOpacity>
           </Box>
 
           {isLoading ? (
             <Loading />
           ) : (
-            <Button
-              variant="primary"
-              onPress={handleSubmit(onSubmit)}
-              title="Registrar"
-            />
+            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+              <Text>Login</Text>
+            </TouchableOpacity>
           )}
 
           <Box
@@ -143,11 +142,9 @@ export function Login() {
             alignItems="center"
             justifyContent="center">
             <Text mr="xs">Não tem uma conta?</Text>
-            <Button
-              onPress={handleNavigateToRegister}
-              variant="link"
-              title="Registrar!"
-            />
+            <TouchableOpacity onPress={handleNavigateToRegister}>
+              <Text>Registre-se!</Text>
+            </TouchableOpacity>
           </Box>
         </Box>
       </ScrollView>

@@ -15,8 +15,6 @@ export function Routes() {
   const isUserLogged = useBoundStore(state => state.isUserLogged);
   const theme = useTheme<ThemeProps>();
 
-  console.log(isUserLogged);
-
   const MyTheme = {
     ...DefaultTheme,
     colors: {
