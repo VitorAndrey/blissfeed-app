@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -67,6 +72,11 @@ export function Login() {
     navigation.navigate('Register');
   }
 
+  function handleSubmitEnding() {
+    Keyboard.dismiss();
+    handleSubmit(onSubmit);
+  }
+
   return (
     <Box flex={1}>
       <ScrollView
@@ -93,6 +103,9 @@ export function Login() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                enterKeyHint="done"
+                onSubmitEditing={handleSubmitEnding}
+                keyboardType="email-address"
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -110,6 +123,9 @@ export function Login() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                enterKeyHint="done"
+                onSubmitEditing={handleSubmitEnding}
+                keyboardType="visible-password"
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}

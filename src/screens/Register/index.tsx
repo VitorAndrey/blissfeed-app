@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -77,6 +82,11 @@ export function Register() {
     setAgreedConditions(prev => !prev);
   }
 
+  function handleSubmitEnding() {
+    Keyboard.dismiss();
+    handleSubmit(onSubmit);
+  }
+
   return (
     <Box flex={1}>
       <ScrollView
@@ -103,6 +113,8 @@ export function Register() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                enterKeyHint="done"
+                onSubmitEditing={handleSubmitEnding}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -120,6 +132,9 @@ export function Register() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                enterKeyHint="done"
+                onSubmitEditing={handleSubmitEnding}
+                keyboardType="email-address"
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -137,6 +152,9 @@ export function Register() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                enterKeyHint="done"
+                onSubmitEditing={handleSubmitEnding}
+                keyboardType="visible-password"
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -192,6 +210,7 @@ export function Register() {
             <Button
               variant="link"
               label="Entrar!"
+              disabled={!agreedConditions || isLoading}
               onPress={handleNavigateToLogin}
             />
           </Box>

@@ -42,11 +42,13 @@ export function Welcome() {
       </Box>
 
       <Box alignItems="center" px="4">
-        <Text mb="4" style={styles.w_200} textAlign="center" variant="heading">
+        <Text textAlign="center" variant="heading">
           Compartilhe{' '}
           <Text variant="heading" color="primary">
             Paz{' '}
           </Text>
+        </Text>
+        <Text textAlign="center" variant="heading" mb="4">
           Cultive
           <Text variant="heading" color="primary">
             {' '}

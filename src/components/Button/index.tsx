@@ -13,9 +13,11 @@ type ButtonProps = TouchableOpacityProps & {
   variant: 'primary' | 'link';
 };
 
-export function Button({ label, variant, ...rest }: ButtonProps) {
+export function Button({ label, variant, disabled, ...rest }: ButtonProps) {
   const theme = useTheme<ThemeProps>();
   const { primary } = theme.colors;
+  const opacity = disabled ? 0.5 : 1;
+  console.log(opacity);
 
   if (variant === 'link') {
     return (
@@ -27,7 +29,11 @@ export function Button({ label, variant, ...rest }: ButtonProps) {
 
   return (
     <TouchableOpacity
-      style={{ backgroundColor: primary, ...styles.primary_button }}
+      style={{
+        backgroundColor: primary,
+        ...styles.primary_button,
+        opacity,
+      }}
       {...rest}
       activeOpacity={0.8}>
       <Text color="secondaryForeground">{label}</Text>
