@@ -1,9 +1,7 @@
 import { createBox, createText, createTheme } from '@shopify/restyle';
 
 import { borderRadii } from './borderRadius';
-import { buttonVariants } from './buttonVariants';
-import { colors } from './colors';
-import { createDarkTheme } from './darkTheme';
+import { colors, palette } from './colors';
 import { spacing } from './spacing';
 import { textVariants } from './textVariants';
 
@@ -11,11 +9,31 @@ const theme = createTheme({
   colors,
   spacing,
   textVariants,
-  buttonVariants,
   borderRadii,
 });
 
-const darkTheme: ThemeProps = createDarkTheme();
+const darkTheme: ThemeProps = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    primary: palette.purpleLight,
+    secondary: palette.purpleDark,
+
+    mainBackground: palette.black,
+
+    mainForeground: palette.white,
+    secondaryForeground: palette.black,
+    mutedForeground: palette.gray_700,
+
+    tabBarActiveTintColor: palette.gray_50,
+    tabBarInactiveTintColor: palette.gray_700,
+
+    success: palette.greenLight,
+    danger: palette.redLight,
+
+    bgInput: palette.gray_800,
+  },
+};
 
 export type ThemeProps = typeof theme;
 export const Box = createBox<ThemeProps>();

@@ -1,7 +1,27 @@
 export const textVariants = {
   defaults: {
     fontFamily: 'Inter-Regular',
+    color: 'mainForeground',
   },
+  heading: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 24,
+    lineHeight: 32,
+  },
+  button_primary: {
+    color: 'secondaryForeground',
+    fontSize: 24,
+    lineHeight: 32,
+  },
+  button_secondary: {
+    color: 'mainForeground',
+    fontSize: 24,
+    lineHeight: 32,
+  },
+  link: {
+    textDecorationLine: 'underline',
+  },
+
   text_xs: {
     fontSize: 12,
     lineHeight: 16,

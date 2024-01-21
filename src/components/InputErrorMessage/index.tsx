@@ -1,4 +1,6 @@
-import { Text, TextProps, View } from 'react-native';
+import { TextProps } from 'react-native';
+
+import { Box, Text } from '@theme/index';
 
 type InputErrorMessageProps = TextProps & {
   message?: string;
@@ -6,8 +8,8 @@ type InputErrorMessageProps = TextProps & {
 
 export function InputErrorMessage({ message }: InputErrorMessageProps) {
   return (
-    <View>
-      <Text>{message || ''}</Text>
-    </View>
+    <Box height={28} px="2" justifyContent="flex-start">
+      <Text color="danger">{message || ''}</Text>
+    </Box>
   );
 }

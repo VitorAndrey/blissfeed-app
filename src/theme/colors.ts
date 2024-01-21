@@ -27,10 +27,18 @@ export const palette = {
 export const colors = {
   primary: palette.purpleDark,
   secondary: palette.purpleLight,
+
   mainBackground: palette.white,
+
   mainForeground: palette.black,
+  secondaryForeground: palette.white,
+  mutedForeground: palette.gray_500,
+
   tabBarActiveTintColor: palette.gray_800,
   tabBarInactiveTintColor: palette.gray_300,
+
   success: palette.greenDark,
   danger: palette.redDark,
+
+  bgInput: palette.gray_50,
 };

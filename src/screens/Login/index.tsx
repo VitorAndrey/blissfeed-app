@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
@@ -13,13 +13,16 @@ import { loginUser } from '@services/api';
 
 import { Box, Text } from '@theme/index';
 
+import { Button } from '@components/Button';
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
 import { Loading } from '@components/Loadig';
 
 const schema = z.object({
-  email: z.string().min(1, 'Insira o E-mail.'),
-  password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres.'),
+  email: z.string({ required_error: 'Insira o Email.' }),
+  password: z
+    .string({ required_error: 'Insira a Senha.' })
+    .min(8, 'A senha deve ter no mínimo 8 caracteres.'),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -68,23 +71,24 @@ export function Login() {
     <Box flex={1}>
       <ScrollView
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'center',
-          paddingVertical: 10,
-        }}
+        contentContainerStyle={styles.scrollView}
         showsVerticalScrollIndicator={false}>
-        <Box alignItems="center" px="6" pb="1">
-          <Text mb="2" textAlign="center">
-            Bem vindo!
+        <Box alignItems="center" px="6" pb="8">
+          <Text mb="2" textAlign="center" variant="text_2xl">
+            Olá novamente!
           </Text>
-          <Text textAlign="center">
-            Obrigado por entrar no Blissfeed... É bom ter você conosco!
+          <Text textAlign="center" color="mutedForeground">
+            Obrigado por entrar no Blissfeed...
+          </Text>
+          <Text textAlign="center" color="mutedForeground">
+            É bom ter você conosco!
           </Text>
         </Box>
 
-        <Box py="1" px="2">
-          <Text>Email</Text>
+        <Box p="2" width={350}>
+          <Text px="2" mb="1">
+            Email
+          </Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -92,14 +96,16 @@ export function Login() {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                placeholder="exemplo@gmail.com"
+                placeholder="Ex:exemplo@gmail.com"
               />
             )}
             name="email"
           />
           <InputErrorMessage message={errors.email?.message} />
 
-          <Text>Senha</Text>
+          <Text px="2" mb="1">
+            Senha
+          </Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -114,36 +120,54 @@ export function Login() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <Box
-            mb="2"
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="flex-end">
+          <Box my="2" flexDirection="row" justifyContent="flex-end">
             <TouchableOpacity>
-              <Text>Esqueci a senha</Text>
+              <Text color="primary" variant="link">
+                Esqueci a senha
+              </Text>
             </TouchableOpacity>
           </Box>
 
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-              <Text>Login</Text>
-            </TouchableOpacity>
-          )}
+          <Box alignItems="center" my="5">
+            {isLoading ? (
+              <Box height={50}>
+                <Loading />
+              </Box>
+            ) : (
+              <Button
+                variant="primary"
+                label="Login"
+                onPress={handleSubmit(onSubmit)}
+              />
+            )}
+          </Box>
 
           <Box
             mt="2"
             flexDirection="row"
             alignItems="center"
             justifyContent="center">
-            <Text mr="1">Não tem uma conta?</Text>
-            <TouchableOpacity onPress={handleNavigateToRegister}>
-              <Text>Registre-se!</Text>
-            </TouchableOpacity>
+            <Text mr="1" color="mutedForeground">
+              Não tem uma conta?
+            </Text>
+
+            <Button
+              variant="link"
+              label="Entrar!"
+              onPress={handleNavigateToRegister}
+            />
           </Box>
         </Box>
       </ScrollView>
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+});

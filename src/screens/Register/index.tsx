@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '@shopify/restyle';
 import { z } from 'zod';
 
 import { AuthNavigationRoutesProps } from '@routes/auth.routes';
@@ -12,16 +13,19 @@ import { registerUser } from '@services/api';
 
 import { CheckIcon } from 'lucide-react-native';
 
-import { Box, Text } from '@theme/index';
+import { Box, Text, ThemeProps } from '@theme/index';
 
+import { Button } from '@components/Button';
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
 import { Loading } from '@components/Loadig';
 
 const schema = z.object({
-  name: z.string().min(1, 'Insira o Nome'),
-  email: z.string().min(1, 'Insira o E-mail.'),
-  password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres.'),
+  name: z.string({ required_error: 'Insira o Nome.' }),
+  email: z.string({ required_error: 'Insira o Email.' }),
+  password: z
+    .string({ required_error: 'Insira a Senha.' })
+    .min(8, 'A senha deve ter no mínimo 8 caracteres.'),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -30,6 +34,8 @@ export function Register() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [agreedConditions, setAgreedConditions] = useState<boolean>(false);
 
+  const theme = useTheme<ThemeProps>();
+  const { bgInput, primary } = theme.colors;
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
   const {
@@ -75,24 +81,24 @@ export function Register() {
     <Box flex={1}>
       <ScrollView
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'center',
-          paddingVertical: 10,
-        }}
+        contentContainerStyle={styles.scrollView}
         showsVerticalScrollIndicator={false}>
-        <Box alignItems="center" px="6" pb="1">
-          <Text mb="2" textAlign="center">
+        <Box alignItems="center" px="6" pb="8">
+          <Text mb="2" textAlign="center" variant="text_2xl">
             Criar Conta
           </Text>
-          <Text textAlign="center">
-            Desabafe, conecte-se e encontre paz. Junte-se à comunidade
-            Blissfeed.
+          <Text textAlign="center" color="mutedForeground">
+            Desabafe, conecte-se e encontre paz.
+          </Text>
+          <Text textAlign="center" color="mutedForeground">
+            Junte-se à comunidade Blissfeed.
           </Text>
         </Box>
 
-        <Box py="1" px="2">
-          <Text>Nome</Text>
+        <Box p="2" width={350}>
+          <Text px="2" mb="1">
+            Nome
+          </Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -105,9 +111,11 @@ export function Register() {
             )}
             name="name"
           />
-          <InputErrorMessage message={errors.email?.message} />
+          <InputErrorMessage message={errors.name?.message} />
 
-          <Text>Email</Text>
+          <Text px="2" mb="1">
+            Email
+          </Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -122,7 +130,9 @@ export function Register() {
           />
           <InputErrorMessage message={errors.email?.message} />
 
-          <Text>Senha</Text>
+          <Text px="2" mb="1">
+            Senha
+          </Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -137,18 +147,12 @@ export function Register() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <Box mb="2" flexDirection="row" alignItems="center">
+          <Box my="2" flexDirection="row" alignItems="center">
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={handleAgreedConditions}
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'lightgray',
-                height: 20,
-                width: 20,
-                borderRadius: 5,
-              }}>
-              {agreedConditions && <CheckIcon color="white" size={14} />}
+              style={{ backgroundColor: bgInput, ...styles.checkBox }}>
+              {agreedConditions && <CheckIcon color={primary} size={14} />}
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={1}
@@ -156,30 +160,59 @@ export function Register() {
               <Text mx="1">Aceito os</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-              <Text>termos e condições.</Text>
+              <Text color="primary" variant="link">
+                termos e condições.
+              </Text>
             </TouchableOpacity>
           </Box>
 
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-              <Text>Registrar</Text>
-            </TouchableOpacity>
-          )}
+          <Box alignItems="center" my="5">
+            {isLoading ? (
+              <Box height={50}>
+                <Loading />
+              </Box>
+            ) : (
+              <Button
+                variant="primary"
+                label="Registrar"
+                onPress={handleSubmit(onSubmit)}
+              />
+            )}
+          </Box>
 
           <Box
             mt="2"
             flexDirection="row"
             alignItems="center"
             justifyContent="center">
-            <Text mr="1">Já tem uma conta?</Text>
-            <TouchableOpacity onPress={handleNavigateToLogin}>
-              <Text>Entrar!</Text>
-            </TouchableOpacity>
+            <Text mr="1" color="mutedForeground">
+              Já tem uma conta?
+            </Text>
+
+            <Button
+              variant="link"
+              label="Entrar!"
+              onPress={handleNavigateToLogin}
+            />
           </Box>
         </Box>
       </ScrollView>
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  checkBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 20,
+    width: 20,
+    borderRadius: 5,
+  },
+});

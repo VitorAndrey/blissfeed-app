@@ -1,37 +1,49 @@
-import { TouchableOpacity } from 'react-native';
-
 import {
-  createRestyleComponent,
-  createText,
-  createVariant,
-  spacing,
-  SpacingProps,
-  VariantProps,
-} from '@shopify/restyle';
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 
-import { ThemeProps } from '@theme/index';
+import { useTheme } from '@shopify/restyle';
 
-const Text = createText<ThemeProps>();
+import { Text, ThemeProps } from '@theme/index';
 
-type BoxCustomProps = SpacingProps<ThemeProps> &
-  VariantProps<ThemeProps, 'buttonVariants'>;
-
-type ButtonProps = BoxCustomProps & {
-  title: string;
-  onPress?: () => void;
+type ButtonProps = TouchableOpacityProps & {
+  label: string;
+  variant: 'primary' | 'link';
 };
 
-const Box = createRestyleComponent<BoxCustomProps, ThemeProps>([
-  spacing,
-  createVariant({ themeKey: 'buttonVariants' }),
-]);
+export function Button({ label, variant, ...rest }: ButtonProps) {
+  const theme = useTheme<ThemeProps>();
+  const { primary } = theme.colors;
 
-export function Button({ title, onPress, ...rest }: ButtonProps) {
+  if (variant === 'link') {
+    return (
+      <TouchableOpacity {...rest} activeOpacity={0.8}>
+        <Text style={{ color: primary, ...styles.linkText }}>{label}</Text>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={{ flex: 1 }}>
-      <Box {...rest}>
-        <Text>{title}</Text>
-      </Box>
+    <TouchableOpacity
+      style={{ backgroundColor: primary, ...styles.primary_button }}
+      {...rest}
+      activeOpacity={0.8}>
+      <Text color="secondaryForeground">{label}</Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  primary_button: {
+    borderRadius: 9999,
+    height: 50,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  linkText: {
+    textDecorationLine: 'underline',
+  },
+});

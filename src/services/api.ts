@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { Comment } from '@models/comment';
 import { Post } from '@models/post';
 import { CreateUser, LoginUser, User } from '@models/user';
 
@@ -16,6 +17,10 @@ export async function getPost(id: string) {
 
 export async function createPost(data: Post) {
   await axiosInstance.post('posts', data);
+}
+
+export async function createComment(data: Comment) {
+  await axiosInstance.post('comments', data);
 }
 
 export async function loginUser(data: LoginUser) {

@@ -1,19 +1,18 @@
 import { ActivityIndicator } from 'react-native';
 
-import { createBox } from '@shopify/restyle';
+import { createBox, useTheme } from '@shopify/restyle';
 
 import { ThemeProps } from '@theme/index';
 
 const Box = createBox<ThemeProps>();
 
-type LoadingProps = {
-  color?: string;
-};
+export function Loading() {
+  const theme = useTheme<ThemeProps>();
+  const { primary } = theme.colors;
 
-export function Loading({ color = '#0000cc' }: LoadingProps) {
   return (
-    <Box>
-      <ActivityIndicator color={color} />
+    <Box flex={1} alignItems="center" justifyContent="center">
+      <ActivityIndicator color={primary} />
     </Box>
   );
 }

@@ -1,10 +1,12 @@
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 
 import { Box, Text } from '@theme/index';
+
+import { Button } from '@components/Button';
 
 const welcomeImage = require('../../assets/images/welcome.png');
 
@@ -20,50 +22,77 @@ export function Welcome() {
   }
 
   return (
-    <Box flex={1} py="8">
+    <Box flex={1} py="10">
       <Box
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
         gap="2">
-        <Box height={32} width={32} borderRadius={50} bg="mainForeground" />
-        <Text variant="text_3xl">Blissfeed</Text>
+        <Box
+          height={28}
+          width={28}
+          borderRadius={'rounded_full'}
+          bg="primary"
+        />
+        <Text variant="text_2xl">Blissfeed</Text>
       </Box>
 
       <Box flex={1}>
-        <Image
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-          }}
-          source={welcomeImage}
-        />
+        <Image style={styles.mainImage} source={welcomeImage} />
       </Box>
 
-      <Box alignItems="center" px="3">
-        <Text mb="2" style={{ maxWidth: 180 }} textAlign="center">
-          Compartilhe <Text>Paz </Text>
+      <Box alignItems="center" px="4">
+        <Text mb="4" style={styles.w_200} textAlign="center" variant="heading">
+          Compartilhe{' '}
+          <Text variant="heading" color="primary">
+            Paz{' '}
+          </Text>
           Cultive
-          <Text> Alegria</Text>
+          <Text variant="heading" color="primary">
+            {' '}
+            Alegria
+          </Text>
         </Text>
 
-        <Text textAlign="center">
-          Do desabafo à serenidade, da partilha à alegria. Compartilhe amor com
-          Blissfeed.
+        <Text textAlign="center" color="mutedForeground">
+          Do desabafo à serenidade, da partilha à alegria.
+        </Text>
+        <Text textAlign="center" color="mutedForeground">
+          Compartilhe amor com Blissfeed.
         </Text>
 
-        <TouchableOpacity onPress={handleNavigateToRegister}>
-          <Text>Vamos começar!</Text>
-        </TouchableOpacity>
+        <Box width={350} my="5">
+          <Button
+            variant="primary"
+            onPress={handleNavigateToRegister}
+            label="Vamos começar!"
+          />
+        </Box>
 
         <Box flexDirection="row" alignItems="center" justifyContent="center">
-          <Text mr="1">Já tem uma conta?</Text>
-          <TouchableOpacity onPress={handleNavigateToLogin}>
-            <Text>Entrar!</Text>
-          </TouchableOpacity>
+          <Text mr="1" color="mutedForeground">
+            Já tem uma conta?
+          </Text>
+          <Button
+            variant="link"
+            onPress={handleNavigateToLogin}
+            label="Entrar!"
+          />
         </Box>
       </Box>
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  mainImage: {
+    width: '100%',
+    maxWidth: 400,
+    height: '100%',
+    alignSelf: 'center',
+    objectFit: 'contain',
+  },
+  w_200: {
+    maxWidth: 200,
+  },
+});
