@@ -16,7 +16,7 @@ export const storage = new MMKV();
 const queryClient = new QueryClient();
 
 export default function App() {
-  const colorScheme = Appearance.getColorScheme();
+  const [colorScheme, setColorScheme] = useState(Appearance.getColorScheme());
   const handleOnLoadUser = useBoundStore(state => state.handleOnLoadUser);
   const onLoadOnboarding = useBoundStore(state => state.onLoadOnboarding);
 
@@ -33,6 +33,16 @@ export default function App() {
 
     loadData();
   }, [handleOnLoadUser, onLoadOnboarding]);
+
+  useEffect(() => {
+    const appearanceChangeListener = Appearance.addChangeListener(
+      ({ colorScheme }) => {
+        setColorScheme(colorScheme);
+      },
+    );
+
+    return () => appearanceChangeListener.remove();
+  }, []);
 
   if (loading) {
     return (

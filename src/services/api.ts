@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Post } from '@models/post';
 import { CreateUser, LoginUser, User } from '@models/user';
 
-const BASE_URL = 'http://localhost:3333';
+const BASE_URL = 'https://blissfeed.onrender.com/';
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export async function getPostsIds() {

@@ -20,6 +20,17 @@ export const palette = {
   gray_800: '#2f2e2a',
   gray_900: '#151413',
 
-  black: '#0B0B0B',
-  white: '#F0F2F3',
+  black: '#000000',
+  white: '#FFFFFF',
+};
+
+export const colors = {
+  primary: palette.purpleDark,
+  secondary: palette.purpleLight,
+  mainBackground: palette.white,
+  mainForeground: palette.black,
+  tabBarActiveTintColor: palette.gray_800,
+  tabBarInactiveTintColor: palette.gray_300,
+  success: palette.greenDark,
+  danger: palette.redDark,
 };

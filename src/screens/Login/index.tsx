@@ -4,7 +4,6 @@ import { ScrollView, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
-import { createBox, createText } from '@shopify/restyle';
 import { useBoundStore } from '@store/index';
 import { z } from 'zod';
 
@@ -12,7 +11,7 @@ import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 import { LoginUser } from '@models/user';
 import { loginUser } from '@services/api';
 
-import { ThemeProps } from '@theme/index';
+import { Box, Text } from '@theme/index';
 
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
@@ -24,9 +23,6 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
-const Box = createBox<ThemeProps>();
-const Text = createText<ThemeProps>();
 
 export function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -78,8 +74,8 @@ export function Login() {
           paddingVertical: 10,
         }}
         showsVerticalScrollIndicator={false}>
-        <Box alignItems="center" px="lg" pb="xs">
-          <Text mb="sm" textAlign="center">
+        <Box alignItems="center" px="6" pb="1">
+          <Text mb="2" textAlign="center">
             Bem vindo!
           </Text>
           <Text textAlign="center">
@@ -87,7 +83,7 @@ export function Login() {
           </Text>
         </Box>
 
-        <Box py="xs" px="sm">
+        <Box py="1" px="2">
           <Text>Email</Text>
           <Controller
             control={control}
@@ -119,7 +115,7 @@ export function Login() {
           <InputErrorMessage message={errors.password?.message} />
 
           <Box
-            mb="sm"
+            mb="2"
             flexDirection="row"
             alignItems="center"
             justifyContent="flex-end">
@@ -137,11 +133,11 @@ export function Login() {
           )}
 
           <Box
-            mt="sm"
+            mt="2"
             flexDirection="row"
             alignItems="center"
             justifyContent="center">
-            <Text mr="xs">Não tem uma conta?</Text>
+            <Text mr="1">Não tem uma conta?</Text>
             <TouchableOpacity onPress={handleNavigateToRegister}>
               <Text>Registre-se!</Text>
             </TouchableOpacity>

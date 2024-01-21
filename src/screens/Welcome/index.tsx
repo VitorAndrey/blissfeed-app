@@ -2,16 +2,11 @@ import { Image, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
-const welcomeImage = require('../../assets/images/welcome.png');
-
-const Box = createBox<ThemeProps>();
-const Text = createText<ThemeProps>();
-
-import { createBox, createText } from '@shopify/restyle';
-
 import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 
-import { ThemeProps } from '@theme/index';
+import { Box, Text } from '@theme/index';
+
+const welcomeImage = require('../../assets/images/welcome.png');
 
 export function Welcome() {
   const navigation = useNavigation<AuthNavigationRoutesProps>();
@@ -25,14 +20,14 @@ export function Welcome() {
   }
 
   return (
-    <Box flex={1} py="xl">
+    <Box flex={1} py="8">
       <Box
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        gap="sm">
+        gap="2">
         <Box height={32} width={32} borderRadius={50} bg="mainForeground" />
-        <Text variant="header">Blissfeed</Text>
+        <Text variant="text_3xl">Blissfeed</Text>
       </Box>
 
       <Box flex={1}>
@@ -46,8 +41,8 @@ export function Welcome() {
         />
       </Box>
 
-      <Box alignItems="center" px="md">
-        <Text mb="sm" style={{ maxWidth: 180 }} textAlign="center">
+      <Box alignItems="center" px="3">
+        <Text mb="2" style={{ maxWidth: 180 }} textAlign="center">
           Compartilhe <Text>Paz </Text>
           Cultive
           <Text> Alegria</Text>
@@ -63,7 +58,7 @@ export function Welcome() {
         </TouchableOpacity>
 
         <Box flexDirection="row" alignItems="center" justifyContent="center">
-          <Text mr="xs">Já tem uma conta?</Text>
+          <Text mr="1">Já tem uma conta?</Text>
           <TouchableOpacity onPress={handleNavigateToLogin}>
             <Text>Entrar!</Text>
           </TouchableOpacity>

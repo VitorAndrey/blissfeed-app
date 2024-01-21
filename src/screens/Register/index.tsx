@@ -4,7 +4,6 @@ import { ScrollView, TouchableOpacity } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
-import { createBox, createText } from '@shopify/restyle';
 import { z } from 'zod';
 
 import { AuthNavigationRoutesProps } from '@routes/auth.routes';
@@ -13,7 +12,7 @@ import { registerUser } from '@services/api';
 
 import { CheckIcon } from 'lucide-react-native';
 
-import { ThemeProps } from '@theme/index';
+import { Box, Text } from '@theme/index';
 
 import { FormInput } from '@components/FormInput';
 import { InputErrorMessage } from '@components/InputErrorMessage';
@@ -26,9 +25,6 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
-const Box = createBox<ThemeProps>();
-const Text = createText<ThemeProps>();
 
 export function Register() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -85,8 +81,8 @@ export function Register() {
           paddingVertical: 10,
         }}
         showsVerticalScrollIndicator={false}>
-        <Box alignItems="center" px="lg" pb="xs">
-          <Text mb="sm" textAlign="center">
+        <Box alignItems="center" px="6" pb="1">
+          <Text mb="2" textAlign="center">
             Criar Conta
           </Text>
           <Text textAlign="center">
@@ -95,7 +91,7 @@ export function Register() {
           </Text>
         </Box>
 
-        <Box py="xs" px="sm">
+        <Box py="1" px="2">
           <Text>Nome</Text>
           <Controller
             control={control}
@@ -141,7 +137,7 @@ export function Register() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <Box mb="sm" flexDirection="row" alignItems="center">
+          <Box mb="2" flexDirection="row" alignItems="center">
             <TouchableOpacity
               onPress={handleAgreedConditions}
               style={{
@@ -157,7 +153,7 @@ export function Register() {
             <TouchableOpacity
               activeOpacity={1}
               onPress={handleAgreedConditions}>
-              <Text mx="xs">Aceito os</Text>
+              <Text mx="1">Aceito os</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text>termos e condições.</Text>
@@ -173,11 +169,11 @@ export function Register() {
           )}
 
           <Box
-            mt="sm"
+            mt="2"
             flexDirection="row"
             alignItems="center"
             justifyContent="center">
-            <Text mr="xs">Já tem uma conta?</Text>
+            <Text mr="1">Já tem uma conta?</Text>
             <TouchableOpacity onPress={handleNavigateToLogin}>
               <Text>Entrar!</Text>
             </TouchableOpacity>
