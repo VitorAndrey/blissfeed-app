@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   Keyboard,
@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useBoundStore } from '@store/index';
 import { z } from 'zod';
 
@@ -42,6 +42,7 @@ export function Login() {
     control,
     handleSubmit,
     reset,
+    clearErrors,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -77,6 +78,12 @@ export function Login() {
     handleSubmit(onSubmit);
   }
 
+  useFocusEffect(
+    useCallback(() => {
+      clearErrors();
+    }, []),
+  );
+
   return (
     <Box flex={1}>
       <ScrollView
@@ -85,7 +92,7 @@ export function Login() {
         showsVerticalScrollIndicator={false}>
         <Box alignItems="center" px="6" pb="8">
           <Text mb="2" textAlign="center" variant="text_2xl">
-            Olá novamente!
+            Olá!
           </Text>
           <Text textAlign="center" color="mutedForeground">
             Obrigado por entrar no Blissfeed...
@@ -103,6 +110,7 @@ export function Login() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                autoCapitalize="none"
                 enterKeyHint="done"
                 onSubmitEditing={handleSubmitEnding}
                 keyboardType="email-address"
@@ -123,6 +131,7 @@ export function Login() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                autoCapitalize="none"
                 enterKeyHint="done"
                 onSubmitEditing={handleSubmitEnding}
                 keyboardType="visible-password"
@@ -139,7 +148,7 @@ export function Login() {
           <Box my="2" flexDirection="row" justifyContent="flex-end">
             <TouchableOpacity>
               <Text color="primary" variant="link">
-                Esqueci a senha
+                Esqueci a senha.
               </Text>
             </TouchableOpacity>
           </Box>
@@ -169,7 +178,7 @@ export function Login() {
 
             <Button
               variant="link"
-              label="Entrar!"
+              label="Registrar!"
               onPress={handleNavigateToRegister}
             />
           </Box>
@@ -184,6 +193,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingTop: 40,
+    paddingBottom: 20,
   },
 });

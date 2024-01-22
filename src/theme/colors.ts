@@ -41,4 +41,7 @@ export const colors = {
   danger: palette.redDark,
 
   bgInput: palette.gray_50,
+
+  white: palette.white,
+  black: palette.black,
 };

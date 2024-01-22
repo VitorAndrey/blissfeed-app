@@ -9,9 +9,9 @@ export const textVariants = {
     lineHeight: 32,
   },
   button_primary: {
-    color: 'secondaryForeground',
-    fontSize: 24,
-    lineHeight: 32,
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 24,
   },
   button_secondary: {
     color: 'mainForeground',
@@ -21,7 +21,6 @@ export const textVariants = {
   link: {
     textDecorationLine: 'underline',
   },
-
   text_xs: {
     fontSize: 12,
     lineHeight: 16,

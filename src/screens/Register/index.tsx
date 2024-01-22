@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   Keyboard,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
 import { z } from 'zod';
@@ -47,12 +48,17 @@ export function Register() {
     control,
     handleSubmit,
     reset,
+    clearErrors,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: FormData) => {
+    if (!agreedConditions) {
+      return;
+    }
+
     setIsLoading(true);
 
     const { name, email, password } = data;
@@ -87,6 +93,12 @@ export function Register() {
     handleSubmit(onSubmit);
   }
 
+  useFocusEffect(
+    useCallback(() => {
+      clearErrors();
+    }, []),
+  );
+
   return (
     <Box flex={1}>
       <ScrollView
@@ -95,7 +107,7 @@ export function Register() {
         showsVerticalScrollIndicator={false}>
         <Box alignItems="center" px="6" pb="8">
           <Text mb="2" textAlign="center" variant="text_2xl">
-            Criar Conta
+            Seja bem vindo!
           </Text>
           <Text textAlign="center" color="mutedForeground">
             Desabafe, conecte-se e encontre paz.
@@ -132,6 +144,7 @@ export function Register() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                autoCapitalize="none"
                 enterKeyHint="done"
                 onSubmitEditing={handleSubmitEnding}
                 keyboardType="email-address"
@@ -152,6 +165,7 @@ export function Register() {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <FormInput
+                autoCapitalize="none"
                 enterKeyHint="done"
                 onSubmitEditing={handleSubmitEnding}
                 keyboardType="visible-password"
@@ -210,7 +224,6 @@ export function Register() {
             <Button
               variant="link"
               label="Entrar!"
-              disabled={!agreedConditions || isLoading}
               onPress={handleNavigateToLogin}
             />
           </Box>
@@ -226,6 +239,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10,
+    paddingTop: 40,
+    paddingBottom: 20,
   },
   checkBox: {
     alignItems: 'center',

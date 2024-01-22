@@ -9,15 +9,20 @@ import { useTheme } from '@shopify/restyle';
 import { Text, ThemeProps } from '@theme/index';
 
 type ButtonProps = TouchableOpacityProps & {
-  label: string;
-  variant: 'primary' | 'link';
+  label?: string;
+  variant: 'primary' | 'link' | 'icon';
+  children?: React.ReactNode;
+  disabled?: boolean;
 };
 
-export function Button({ label, variant, disabled, ...rest }: ButtonProps) {
+export function Button({
+  label = 'Button',
+  variant,
+  children,
+  ...rest
+}: ButtonProps) {
   const theme = useTheme<ThemeProps>();
   const { primary } = theme.colors;
-  const opacity = disabled ? 0.5 : 1;
-  console.log(opacity);
 
   if (variant === 'link') {
     return (
@@ -27,16 +32,26 @@ export function Button({ label, variant, disabled, ...rest }: ButtonProps) {
     );
   }
 
+  if (variant === 'icon') {
+    return (
+      <TouchableOpacity
+        style={styles.icon_button}
+        {...rest}
+        activeOpacity={0.8}>
+        {children}
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <TouchableOpacity
       style={{
         backgroundColor: primary,
         ...styles.primary_button,
-        opacity,
       }}
       {...rest}
       activeOpacity={0.8}>
-      <Text color="secondaryForeground">{label}</Text>
+      <Text variant="button_primary">{label}</Text>
     </TouchableOpacity>
   );
 }
@@ -51,5 +66,11 @@ const styles = StyleSheet.create({
   },
   linkText: {
     textDecorationLine: 'underline',
+    paddingVertical: 10,
+  },
+  icon_button: {
+    borderWidth: 1,
+    width: '100%',
+    height: '100%',
   },
 });
