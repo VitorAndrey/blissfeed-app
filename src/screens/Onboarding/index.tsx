@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '@shopify/restyle';
 import { useBoundStore } from '@store/index';
 
 import { AppNavigationRoutesProps } from '@routes/app.routes';
 
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from 'lucide-react-native';
 
-import { Box } from '@theme/index';
+import { Box, ThemeProps } from '@theme/index';
 
 import { Button } from '@components/Button';
 import { OnBoardingItem } from '@components/OnboardingItem.ts';
@@ -33,6 +34,9 @@ type ViewableItemsType = {
 export function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(0);
   const navigation = useNavigation<AppNavigationRoutesProps>();
+
+  const theme = useTheme<ThemeProps>();
+  const { mainForeground } = theme.colors;
 
   const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
   const slidesRef = useRef<FlatList>(null);
@@ -142,7 +146,7 @@ export function Onboarding() {
               activeOpacity={0.8}
               onPress={scrollBackwards}
               style={styles.iconButton}>
-              <ArrowLeftIcon color={'lightgray'} size={20} />
+              <ArrowLeftIcon color={mainForeground} size={20} />
             </TouchableOpacity>
           )}
         </Box>

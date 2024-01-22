@@ -26,7 +26,7 @@ export function OnBoardingItem({ data }: OnBoardingItemProps) {
       <Image source={data.image} style={styles.image} />
 
       <Box style={{ width, ...styles.content }}>
-        <Text mb="6" textAlign="center" variant="text_xl" style={styles.title}>
+        <Text mb="6" textAlign="center" variant="heading" style={styles.title}>
           {data.title}
         </Text>
         <Text textAlign="center" variant="text_xs" color="mutedForeground">
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    maxWidth: 220,
+    maxWidth: 280,
   },
 });

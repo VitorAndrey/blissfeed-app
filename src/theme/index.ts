@@ -23,7 +23,7 @@ const darkTheme: ThemeProps = {
 
     mainForeground: palette.white,
     secondaryForeground: palette.black,
-    mutedForeground: palette.gray_700,
+    mutedForeground: palette.gray_500,
 
     tabBarActiveTintColor: palette.gray_50,
     tabBarInactiveTintColor: palette.gray_700,
