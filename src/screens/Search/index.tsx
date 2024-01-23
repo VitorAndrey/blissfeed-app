@@ -46,6 +46,7 @@ export function Search() {
 
   function handleBackArrow() {
     Keyboard.dismiss();
+    setInputValue('');
     handleStopSearching();
   }
 
@@ -67,11 +68,7 @@ export function Search() {
 
   useEffect(() => {
     handleUpdateFilteredArticlesList();
-  }, [inputValue]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  }, [inputValue, articles]);
 
   return (
     <Box flex={1}>
@@ -96,17 +93,21 @@ export function Search() {
         />
       </Box>
 
-      <FlatList
-        data={filteredArticles}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleOpenArticle(item)}>
-            <Article article={item} />
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.contentContainerStyle}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={filteredArticles}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleOpenArticle(item)}>
+              <Article article={item} />
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
+      )}
     </Box>
   );
 }

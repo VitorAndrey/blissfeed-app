@@ -20,6 +20,7 @@ import { Box, Text, ThemeProps } from '@theme/index';
 
 import { Audio } from '@components/Audio';
 import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
+import { Loading } from '@components/Loadig';
 import { Video } from '@components/Video';
 
 const renderScene = SceneMap({
@@ -55,8 +56,8 @@ export function Relaxing() {
       )}
       style={{
         backgroundColor: 0,
-        marginHorizontal: 10,
         borderColor: primary,
+        elevation: 0,
       }}
     />
   );
@@ -97,53 +98,71 @@ function Videos() {
       <Text px="6" pt="10" py="2" variant="text_xl" fontFamily="Inter-Bold">
         Relaxamento
       </Text>
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        data={relaxationVideos}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleOpenVideo(item)}>
-            <Video video={item} />
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.contentContainerStyle}
-      />
+      {!relaxationVideos || relaxationVideos.length < 1 ? (
+        <Box height={140}>
+          <Loading />
+        </Box>
+      ) : (
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={relaxationVideos}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleOpenVideo(item)}>
+              <Video video={item} />
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
+      )}
 
       <Text px="6" py="2" variant="text_xl" fontFamily="Inter-Bold">
         Foco
       </Text>
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        data={focusVideos}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleOpenVideo(item)}>
-            <Video video={item} />
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.contentContainerStyle}
-      />
+      {!relaxationVideos || relaxationVideos.length < 1 ? (
+        <Box height={140}>
+          <Loading />
+        </Box>
+      ) : (
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={focusVideos}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleOpenVideo(item)}>
+              <Video video={item} />
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
+      )}
 
       <Text px="6" py="2" variant="text_xl" fontFamily="Inter-Bold">
         Entretenimento
       </Text>
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        data={entertainmentVideos}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleOpenVideo(item)}>
-            <Video video={item} />
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.contentContainerStyle}
-      />
+      {!relaxationVideos || relaxationVideos.length < 1 ? (
+        <Box height={140}>
+          <Loading />
+        </Box>
+      ) : (
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={entertainmentVideos}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleOpenVideo(item)}>
+              <Video video={item} />
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
+      )}
     </ScrollView>
   );
 }

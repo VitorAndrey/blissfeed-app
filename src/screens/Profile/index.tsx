@@ -27,8 +27,8 @@ export function Profile() {
   }
 
   return (
-    <Box flex={1}>
-      <Box style={{ position: 'relative', height: 120, width: '100%' }}>
+    <Box flex={1} pt="1">
+      <Box style={{ position: 'relative', height: 160, width: '100%' }}>
         <Image
           source={{ uri: 'https://github.com/X.png' }}
           style={{ height: '100%', width: '100%' }}
@@ -39,25 +39,26 @@ export function Profile() {
           activeOpacity={0.8}
           style={{
             position: 'absolute',
-            top: 4,
-            right: 4,
-            height: 28,
-            width: 28,
+            top: 12,
+            right: 12,
+            height: 32,
+            width: 32,
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 9999,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
           }}>
-          <MoreHorizontalIcon color={'black'} size={18} />
+          <MoreHorizontalIcon color={'white'} size={18} />
         </TouchableOpacity>
       </Box>
       <Box mx="4" alignItems="center">
         <Box
           style={{
             marginTop: -32,
-            height: 60,
-            width: 60,
+            height: 100,
+            width: 100,
             borderRadius: 9999,
-            borderWidth: 12,
+            borderWidth: 8,
             borderColor: 'white',
           }}>
           <Image

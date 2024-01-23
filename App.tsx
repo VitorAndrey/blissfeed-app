@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Appearance, StatusBar } from 'react-native';
+import { Appearance, StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MMKV } from 'react-native-mmkv';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,6 +11,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Routes } from '@routes/index';
 
 import { darkTheme, theme } from '@theme/index';
+
+import { Loading } from '@components/Loadig';
 
 export const storage = new MMKV();
 const queryClient = new QueryClient();
@@ -45,13 +47,7 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return (
-      <ActivityIndicator
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        size="large"
-        color="#0000ff"
-      />
-    );
+    return <Loading />;
   }
 
   return (
