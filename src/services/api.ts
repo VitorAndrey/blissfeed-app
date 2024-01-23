@@ -3,15 +3,21 @@ import axios from 'axios';
 import { Article } from '@models/article';
 import { AudioContent } from '@models/audioContent';
 import { Comment } from '@models/comment';
+import { Conversation } from '@models/Conversation';
 import { Post } from '@models/post';
-import { CreateUser, LoginUser } from '@models/user';
+import { CreateUser, LoginUser, User } from '@models/user';
 import { VideoContent } from '@models/videoContent';
 
 const BASE_URL = 'https://blissfeed.onrender.com/';
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
+type LoginReturn = {
+  conversation: Conversation;
+  user: User;
+};
+
 export async function loginUser(data: LoginUser) {
-  const response = await axiosInstance.post('sessions', data);
+  const response = await axiosInstance.post<LoginReturn>('sessions', data);
 
   return response.data;
 }

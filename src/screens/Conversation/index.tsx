@@ -89,7 +89,7 @@ export function Conversation() {
 
     const gptMessage: MessageType = {
       id: uuidv4(),
-      content: response,
+      content: response ? response : 'Minha internet está lenta, desculpe.',
       timestamp: new Date(),
       publishable: false,
       sent_by_user: false,
@@ -139,7 +139,7 @@ export function Conversation() {
   let inputRef: TextInput | null = null;
 
   return (
-    <Box flex={1}>
+    <Box flex={1} pt="2">
       <Box
         flexDirection="row"
         alignItems="center"

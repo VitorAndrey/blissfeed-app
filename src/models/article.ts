@@ -9,4 +9,5 @@ export interface Article {
   category: ArticleCategory;
   cover_img: string;
   created_at: Date;
+  article_url: string;
 }
