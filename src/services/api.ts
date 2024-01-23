@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { Article } from '@models/article';
 import { AudioContent } from '@models/audioContent';
-import { Comment } from '@models/comment';
+import { Comment, CreateComment } from '@models/comment';
 import { Conversation } from '@models/Conversation';
 import { Post } from '@models/post';
 import { CreateUser, LoginUser, User } from '@models/user';
@@ -31,7 +31,7 @@ export async function getPosts() {
 export async function getUserPosts(user_id: string) {
   return (await axiosInstance.get<Post[]>(`posts/${user_id}`)).data || [];
 }
-export async function createPost(data: Post) {
+export async function createPost(data: { user_id: string; content: string }) {
   await axiosInstance.post('posts', data);
 }
 
@@ -49,8 +49,8 @@ export async function getVideos() {
 export async function getComments(content_id: string) {
   return (await axiosInstance.get(`comments/${content_id}`)).data || [];
 }
-export async function createComment(data: Comment) {
-  await axiosInstance.post('comments', data);
+export async function createComment(data: CreateComment): Promise<Comment> {
+  return (await axiosInstance.post('comments', data)).data.comment;
 }
 
 type ConversationType = {
