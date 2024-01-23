@@ -4,7 +4,7 @@ export interface Message {
   sent_by_user: boolean;
   timestamp: Date;
   conversation_id: string;
-  publishable: boolean;
+  publishable: true | false | 'pending';
 }
 export interface CreateMessage {
   id?: string | undefined;

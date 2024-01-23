@@ -14,27 +14,36 @@ import { darkTheme, theme } from '@theme/index';
 
 import { Loading } from '@components/Loadig';
 
+import 'react-native-get-random-values';
+
 export const storage = new MMKV();
 const queryClient = new QueryClient();
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState(Appearance.getColorScheme());
-  const handleOnLoadUser = useBoundStore(state => state.handleOnLoadUser);
+  const OnLoadUser = useBoundStore(state => state.handleOnLoadUser);
   const onLoadOnboarding = useBoundStore(state => state.onLoadOnboarding);
+  const OnLoadConversation = useBoundStore(
+    state => state.handleOnLoadConversation,
+  );
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        await Promise.all([handleOnLoadUser(), onLoadOnboarding()]);
+        await Promise.all([
+          OnLoadUser(),
+          onLoadOnboarding(),
+          OnLoadConversation(),
+        ]);
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [handleOnLoadUser, onLoadOnboarding]);
+  }, [OnLoadUser, onLoadOnboarding, OnLoadConversation]);
 
   useEffect(() => {
     const appearanceChangeListener = Appearance.addChangeListener(

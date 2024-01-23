@@ -36,6 +36,9 @@ export function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogIn = useBoundStore(state => state.handleLogIn);
+  const handleSetConversation = useBoundStore(
+    state => state.handleSetConversation,
+  );
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
   const {
@@ -54,13 +57,12 @@ export function Login() {
     const { email, password } = data;
 
     try {
-      const user = await loginUser({
+      const { user, conversation } = await loginUser({
         email,
         password,
       } as LoginUser);
-
       reset();
-
+      handleSetConversation(conversation);
       handleLogIn(user);
     } catch (error) {
       console.log('Error while logging user', error);

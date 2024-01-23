@@ -178,7 +178,7 @@ function Audios() {
   if (!audios || audios.length < 1) {
     return (
       <Box flex={1} alignItems="center" justifyContent="center">
-        <Text color="mutedForeground">Sem Audios no momento.</Text>
+        <Text color="mutedForeground">Sem Áudios no momento.</Text>
       </Box>
     );
   }

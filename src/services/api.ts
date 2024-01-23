@@ -4,14 +4,14 @@ import { Article } from '@models/article';
 import { AudioContent } from '@models/audioContent';
 import { Comment } from '@models/comment';
 import { Post } from '@models/post';
-import { CreateUser, LoginUser, User } from '@models/user';
+import { CreateUser, LoginUser } from '@models/user';
 import { VideoContent } from '@models/videoContent';
 
 const BASE_URL = 'https://blissfeed.onrender.com/';
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export async function loginUser(data: LoginUser) {
-  const response = await axiosInstance.post<User>('sessions', data);
+  const response = await axiosInstance.post('sessions', data);
 
   return response.data;
 }
@@ -45,4 +45,15 @@ export async function getComments(content_id: string) {
 }
 export async function createComment(data: Comment) {
   await axiosInstance.post('comments', data);
+}
+
+type ConversationType = {
+  user_id: string;
+  message: string;
+};
+
+export async function conversation(data: ConversationType) {
+  const response = await axiosInstance.post('conversation', data);
+
+  return response.data;
 }
