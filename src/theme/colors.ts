@@ -31,7 +31,7 @@ export const colors = {
 
   mainForeground: palette.black,
   secondaryForeground: palette.white,
-  mutedForeground: palette.gray_500,
+  mutedForeground: palette.gray_400,
 
   tabBarActiveTintColor: palette.gray_800,
   tabBarInactiveTintColor: palette.gray_300,

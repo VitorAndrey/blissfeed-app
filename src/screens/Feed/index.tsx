@@ -9,7 +9,7 @@ import {
 import { Post as PostType } from '@models/post';
 import { usePosts } from '@services/queries';
 
-import { Box, Text } from '@theme/index';
+import { Box } from '@theme/index';
 
 import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
 import { Loading } from '@components/Loadig';

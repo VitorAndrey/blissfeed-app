@@ -14,7 +14,7 @@ import { Box, Text, ThemeProps } from '@theme/index';
 export function Post({ post }: { post: PostType }) {
   const [liked, setLiked] = useState(false);
   const theme = useTheme<ThemeProps>();
-  const { primary, mainBackground } = theme.colors;
+  const { primary, mainBackground, bgInput } = theme.colors;
 
   const formattedCreatedAt = formatDistanceToNow(new Date(post.created_at), {
     addSuffix: true,
@@ -22,7 +22,7 @@ export function Post({ post }: { post: PostType }) {
   });
 
   return (
-    <Box>
+    <Box style={styles.post_container}>
       <Box flexDirection="row" mb="1" gap="2" alignItems="center">
         {post.author?.profile_img ? (
           <Image
@@ -30,7 +30,7 @@ export function Post({ post }: { post: PostType }) {
             source={{ uri: post.author.profile_img }}
           />
         ) : (
-          <Box style={{ backgroundColor: primary, ...styles.avatar }} />
+          <Box style={{ backgroundColor: bgInput, ...styles.avatar }} />
         )}
         <Text style={{ flex: 1 }} numberOfLines={1} ellipsizeMode="tail">
           {post.author?.name}
@@ -67,4 +67,5 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 9999,
   },
+  post_container: {},
 });

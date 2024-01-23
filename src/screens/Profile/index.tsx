@@ -1,6 +1,6 @@
 // import { useState } from "react";
 // import { FlatList } from "react-native";
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
@@ -9,14 +9,11 @@ import { AppNavigationRoutesProps } from '@routes/app.routes';
 
 import {
   HeartIcon,
-  MessageSquareIcon,
   MoreHorizontalIcon,
   UserPlus2Icon,
 } from 'lucide-react-native';
 
 import { Box, Text, ThemeProps } from '@theme/index';
-
-import { Button } from '@components/Button';
 
 export function Profile() {
   // const [data, setData] = useState([{ id: "1", name: "jhon" }]);

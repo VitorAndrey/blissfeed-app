@@ -21,12 +21,13 @@ import { Box, ThemeProps } from '@theme/index';
 
 import { Article } from '@components/Article';
 import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
+import { Loading } from '@components/Loadig';
 
 export function Search() {
   const [inputValue, setInputValue] = useState<string>('');
   const [filteredArticles, setFilteredArticles] = useState<AticleType[]>([]);
 
-  const { data: articles } = useArticles();
+  const { data: articles, isLoading } = useArticles();
   const inputRef = useRef<TextInput>(null);
   const theme = useTheme<ThemeProps>();
   const { mainForeground, bgInput } = theme.colors;
@@ -68,11 +69,15 @@ export function Search() {
     handleUpdateFilteredArticlesList();
   }, [inputValue]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Box flex={1}>
       <BlissFeedHeader />
 
-      <Box pb="10" flexDirection="row" alignItems="center" px="4">
+      <Box pb="4" flexDirection="row" alignItems="center" px="4">
         {isSearching && (
           <TouchableOpacity
             onPress={handleBackArrow}
@@ -110,14 +115,15 @@ const styles = StyleSheet.create({
   contentContainerStyle: {
     flexGrow: 1,
     gap: 30,
+    paddingVertical: 20,
     paddingBottom: 30,
     paddingHorizontal: 20,
   },
   back_button: {
     height: 50,
+    width: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingRight: 8,
   },
   searchInput: {
     height: 50,
