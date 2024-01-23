@@ -26,11 +26,6 @@ export function EditProfile() {
           <Text>Name: {user.name}</Text>
           <Text>Email: {user.email}</Text>
           <Text>Phone Number: {user.phone_number || 'N/A'}</Text>
-          <Text>
-            Birth Date:{' '}
-            {user.birth_date ? user.birth_date.toDateString() : 'N/A'}
-          </Text>
-          <Text>Created At: {user.created_at.toDateString()}</Text>
         </View>
       )}
 

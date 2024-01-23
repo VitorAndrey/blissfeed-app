@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 
+import { useTheme } from '@shopify/restyle';
 import { useBoundStore } from '@store/index';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Comment as CommentType, CreateComment } from '@models/comment';
 import { createComment, getComments } from '@services/api';
 
-import { Box, Text } from '@theme/index';
+import { Box, Text, ThemeProps } from '@theme/index';
 
 import { Comment } from '@components/Comment';
 import { Loading } from '@components/Loadig';
@@ -43,6 +44,9 @@ export function CommentSection({
       setIsLoading(false);
     }
   }
+
+  const theme = useTheme<ThemeProps>();
+  const { bgInput, primary } = theme.colors;
 
   async function handleCreateComment() {
     const tempCommentId = uuidv4();
@@ -92,7 +96,7 @@ export function CommentSection({
   }, []);
 
   return (
-    <View>
+    <View style={{ paddingBottom: 20, paddingHorizontal: 10 }}>
       {toggable && (
         <TouchableOpacity onPress={() => setIsOpen(prev => !prev)}>
           <Text>{isOpen ? 'Esconder Comentários' : 'Ver Comentários'}</Text>
@@ -104,21 +108,36 @@ export function CommentSection({
             <Loading />
           ) : (
             <View>
-              <Box flexDirection="row">
+              <Box flexDirection="row" alignItems="center" gap="2">
                 <TextInput
+                  style={{
+                    backgroundColor: bgInput,
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 20,
+                    paddingHorizontal: 20,
+                  }}
                   placeholder="Deixe um comentário"
                   value={inputValue}
                   onChangeText={text => setInputValue(text)}
                 />
                 <TouchableOpacity
+                  style={{
+                    backgroundColor: primary,
+                    padding: 10,
+                    borderRadius: 20,
+                    paddingHorizontal: 20,
+                  }}
                   disabled={!inputValue}
                   onPress={handleCreateComment}>
                   <Text>Comentar</Text>
                 </TouchableOpacity>
               </Box>
-              {comments?.map(comment => (
-                <Comment key={comment.id} comment={comment} />
-              ))}
+              <View style={{ paddingHorizontal: 30, marginTop: 30 }}>
+                {comments?.map(comment => (
+                  <Comment key={comment.id} comment={comment} />
+                ))}
+              </View>
             </View>
           )}
         </View>

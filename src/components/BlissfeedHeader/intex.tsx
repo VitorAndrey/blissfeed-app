@@ -1,6 +1,8 @@
 import React from 'react';
+import { Image } from 'react-native';
 
 import { Box, Text } from '@theme/index';
+const image = require('../../assets/images/blissfeed.png');
 
 export function BlissFeedHeader() {
   return (
@@ -9,8 +11,8 @@ export function BlissFeedHeader() {
       flexDirection="row"
       alignItems="center"
       justifyContent="center"
-      gap="2">
-      <Box height={28} width={28} borderRadius={'rounded_full'} bg="primary" />
+      gap="1">
+      <Image source={image} style={{ width: 35, height: 35 }} />
       <Text variant="heading">Blissfeed</Text>
     </Box>
   );

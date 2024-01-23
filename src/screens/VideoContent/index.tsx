@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '@shopify/restyle';
 
 import { VideoContent as VideoContentType } from '@models/videoContent';
 
+import { X } from 'lucide-react-native';
+
+import { Box, ThemeProps } from '@theme/index';
+
+import { CommentSection } from '@components/CommentSection';
 import { Loading } from '@components/Loadig';
 
 interface VideoContentProps {
@@ -16,6 +30,8 @@ interface VideoContentProps {
 
 export function VideoContent({ route }: VideoContentProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const theme = useTheme<ThemeProps>();
+  const { mainForeground } = theme.colors;
 
   const { video } = route.params;
   const { width } = useWindowDimensions();
@@ -38,8 +54,26 @@ export function VideoContent({ route }: VideoContentProps) {
     return null;
   }
 
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
+      <Box
+        flexDirection="row"
+        alignItems="center"
+        gap="3"
+        px="4"
+        py="3"
+        bg="bgInput">
+        <TouchableOpacity style={styles.icon_btn} onPress={handleGoBack}>
+          <X color={mainForeground} size={22} />
+        </TouchableOpacity>
+      </Box>
+
       {/* Player de Vídeo do YouTube */}
       <View style={styles.player}>
         <YoutubePlayer
@@ -57,6 +91,15 @@ export function VideoContent({ route }: VideoContentProps) {
 
       {/* Descrição */}
       <Text style={styles.description}>{video.description}</Text>
+
+      <Box pt="10">
+        <CommentSection
+          contentId={video.id}
+          type="video_content"
+          initialOpen
+          toggable={false}
+        />
+      </Box>
     </View>
   );
 }
@@ -87,5 +130,8 @@ const styles = StyleSheet.create({
   },
   learnMoreText: {
     color: 'white',
+  },
+  icon_btn: {
+    padding: 10,
   },
 });
