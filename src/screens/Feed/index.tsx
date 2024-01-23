@@ -11,6 +11,7 @@ import { usePosts } from '@services/queries';
 
 import { Box, Text } from '@theme/index';
 
+import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
 import { Loading } from '@components/Loadig';
 import { Post } from '@components/Post';
 
@@ -31,20 +32,7 @@ export function Feed() {
   return (
     <Box flex={1}>
       <TouchableOpacity onPress={scrollToTop} activeOpacity={0.8}>
-        <Box
-          py="10"
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="center"
-          gap="2">
-          <Box
-            height={28}
-            width={28}
-            borderRadius={'rounded_full'}
-            bg="primary"
-          />
-          <Text variant="heading">Blissfeed</Text>
-        </Box>
+        <BlissFeedHeader />
       </TouchableOpacity>
       {!isLoading ? (
         <FlatList

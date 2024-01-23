@@ -91,11 +91,11 @@ export function Profile() {
         <Box flexDirection="row">
           <TouchableOpacity>
             <UserPlus2Icon color={'white'} size={16} />
-            Seguir
+            <Text>Seguir</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <UserPlus2Icon color={'white'} size={16} />
-            Menssagem
+            <Text>Menssagem</Text>
           </TouchableOpacity>
         </Box>
 

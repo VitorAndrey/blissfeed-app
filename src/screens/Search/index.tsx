@@ -20,6 +20,7 @@ import { ArrowLeft } from 'lucide-react-native';
 import { Box, ThemeProps } from '@theme/index';
 
 import { Article } from '@components/Article';
+import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
 
 export function Search() {
   const [inputValue, setInputValue] = useState<string>('');
@@ -69,7 +70,9 @@ export function Search() {
 
   return (
     <Box flex={1}>
-      <Box py="10" flexDirection="row" alignItems="center" px="4">
+      <BlissFeedHeader />
+
+      <Box pb="10" flexDirection="row" alignItems="center" px="4">
         {isSearching && (
           <TouchableOpacity
             onPress={handleBackArrow}

@@ -6,6 +6,7 @@ import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 
 import { Box, Text } from '@theme/index';
 
+import { BlissFeedHeader } from '@components/BlissfeedHeader/intex';
 import { Button } from '@components/Button';
 
 const welcomeImage = require('../../assets/images/welcome.png');
@@ -22,20 +23,8 @@ export function Welcome() {
   }
 
   return (
-    <Box flex={1} py="10">
-      <Box
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="center"
-        gap="2">
-        <Box
-          height={28}
-          width={28}
-          borderRadius={'rounded_full'}
-          bg="primary"
-        />
-        <Text variant="text_2xl">Blissfeed</Text>
-      </Box>
+    <Box flex={1} pb="10">
+      <BlissFeedHeader />
 
       <Box flex={1}>
         <Image style={styles.mainImage} source={welcomeImage} />

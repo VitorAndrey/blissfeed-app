@@ -38,8 +38,8 @@ export type AppRoutes = {
   Search: undefined;
   EditProfile: undefined;
   Article: { article: AticleType };
-  AudioContent: { audioContent: AudioContentType };
-  VideoContent: { videoContent: VideoContentType };
+  AudioContent: { audio: AudioContentType };
+  VideoContent: { video: VideoContentType };
 };
 
 export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
