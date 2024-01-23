@@ -36,7 +36,7 @@ export function Onboarding() {
   const navigation = useNavigation<AppNavigationRoutesProps>();
 
   const theme = useTheme<ThemeProps>();
-  const { mainForeground } = theme.colors;
+  const { primary } = theme.colors;
 
   const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
   const slidesRef = useRef<FlatList>(null);
@@ -146,7 +146,7 @@ export function Onboarding() {
               activeOpacity={0.8}
               onPress={scrollBackwards}
               style={styles.iconButton}>
-              <ArrowLeftIcon color={mainForeground} size={20} />
+              <ArrowLeftIcon color={primary} size={20} />
             </TouchableOpacity>
           )}
         </Box>

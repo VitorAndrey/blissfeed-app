@@ -5,6 +5,10 @@ export interface Post {
   author_id: string;
   created_at: Date;
   updated_at: Date;
+  author?: {
+    name: string;
+    profile_img?: string;
+  };
 }
 
 export interface CreatePost {

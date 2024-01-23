@@ -1,7 +1,6 @@
 export const palette = {
-  purpleLight: '#8C6FF7',
-  purplePrimary: '#5A31F4',
-  purpleDark: '#3F22AB',
+  orangeLight: '#F08761',
+  orangeDark: '#F07042',
 
   greenLight: '#0ECD9D',
   greenDark: '#0A906E',
@@ -25,8 +24,8 @@ export const palette = {
 };
 
 export const colors = {
-  primary: palette.purpleDark,
-  secondary: palette.purpleLight,
+  primary: palette.orangeDark,
+  secondary: palette.orangeLight,
 
   mainBackground: palette.white,
 

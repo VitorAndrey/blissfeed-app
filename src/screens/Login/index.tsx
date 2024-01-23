@@ -138,6 +138,7 @@ export function Login() {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
+                secureTextEntry={true}
                 placeholder="********"
               />
             )}

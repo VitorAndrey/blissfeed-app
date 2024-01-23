@@ -16,8 +16,8 @@ const darkTheme: ThemeProps = {
   ...theme,
   colors: {
     ...theme.colors,
-    primary: palette.purpleLight,
-    secondary: palette.purpleDark,
+    primary: palette.orangeLight,
+    secondary: palette.orangeDark,
 
     mainBackground: palette.black,
 

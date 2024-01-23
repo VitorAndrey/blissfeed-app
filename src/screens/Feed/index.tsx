@@ -1,60 +1,64 @@
-import { useCallback, useRef, useState } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { useCallback, useRef } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
-import { Post } from '@models/post';
+import { Post as PostType } from '@models/post';
+import { usePosts } from '@services/queries';
 
 import { Box, Text } from '@theme/index';
 
 import { Loading } from '@components/Loadig';
+import { Post } from '@components/Post';
 
 export function Feed() {
-  const [refreshing, setRefreshing] = useState<boolean>(false);
-
+  const { data: posts, isLoading, refetch } = usePosts();
   const flatListRef = useRef<FlatList>(null);
 
-  const data: Post[] = [
-    {
-      id: '123',
-      author_id: '123',
-      content: 'Bom Dia',
-      created_at: new Date(),
-      likes: 23,
-      updated_at: new Date(),
-    },
-  ];
-  const isLoading = false;
-
-  // function scrollToTop() {
-  //   if (flatListRef.current) {
-  //     flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
-  //   }
-  // }
+  function scrollToTop() {
+    if (flatListRef.current) {
+      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+    }
+  }
 
   const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+    refetch();
+  }, [refetch]);
 
   return (
     <Box flex={1}>
+      <TouchableOpacity onPress={scrollToTop} activeOpacity={0.8}>
+        <Box
+          py="10"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="center"
+          gap="2">
+          <Box
+            height={28}
+            width={28}
+            borderRadius={'rounded_full'}
+            bg="primary"
+          />
+          <Text variant="heading">Blissfeed</Text>
+        </Box>
+      </TouchableOpacity>
       {!isLoading ? (
         <FlatList
           ref={flatListRef}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
           }
-          data={data}
+          data={posts}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          renderItem={({ item }: { item: PostType }) => (
+            <Post key={item.id} post={item} />
+          )}
           keyExtractor={item => item.id}
-          contentContainerStyle={{
-            flexGrow: 1,
-            gap: 20,
-            paddingVertical: 30,
-            paddingHorizontal: 20,
-          }}
+          contentContainerStyle={styles.contentContainerStyle}
         />
       ) : (
         <Loading />
@@ -62,3 +66,12 @@ export function Feed() {
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  contentContainerStyle: {
+    flexGrow: 1,
+    gap: 40,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+  },
+});
